@@ -18,3 +18,8 @@
 ```bash
     4.ssh -T git@github.com
 ```
+
+
+eval $("ssh-agent -s")
+ssh-add privatekey
+ssh -T git@github.com
