@@ -1,0 +1,86 @@
+Sure, I can give you an overview of how to implement a single cycle CPU simulator called MiniCPU using C language.
+
+The first step in building a CPU simulator is to define the instruction set architecture (ISA) for the CPU. The ISA defines the set of instructions that the CPU can execute, as well as the format of the instructions and the behavior of the CPU when executing them.
+
+Once you have defined the ISA, you can start building the CPU simulator. Here are the basic steps you can follow:
+
+1. Define the CPU state: The CPU state includes the registers, memory, and other state information that the CPU needs to execute instructions. You can define a struct to hold the CPU state information.
+
+2. Fetch the instruction: The first step in executing an instruction is to fetch it from memory. You can define a function to fetch an instruction from memory based on the program counter (PC) register.
+
+3. Decode the instruction: Once you have fetched the instruction, you need to decode it to determine what operation it represents. You can define a function to decode the instruction based on its opcode and operand fields.
+
+4. Execute the instruction: Once you have decoded the instruction, you can execute it by performing the appropriate operation on the CPU state. You can define a function to execute each type of instruction.
+
+5. Update the CPU state: After executing the instruction, you need to update the CPU state to reflect the changes made by the instruction. This includes updating the registers, memory, and other state information. You can define a function to update the CPU state based on the result of the instruction execution.
+
+6. Repeat: Once you have updated the CPU state, you can repeat the process by fetching the next instruction and repeating steps 3-5.
+
+Here is some sample code to get you started:
+
+```c
+#include <stdio.h>
+
+// Define the CPU state
+typedef struct {
+    int pc;
+    int reg[32];
+    int mem[65536];
+} cpu_state;
+
+// Fetch an instruction from memory
+int fetch(cpu_state* state) {
+    int inst = state->mem[state->pc];
+    state->pc++;
+    return inst;
+}
+
+// Decode an instruction
+void decode(int inst, int* opcode, int* op1, int* op2) {
+    *opcode = (inst >> 26) & 0x3F;
+    *op1 = (inst >> 21) & 0x1F;
+    *op2 = inst & 0xFFFFF;
+}
+
+// Execute an add instruction
+void add(cpu_state* state, int op1, int op2, int dest) {
+    state->reg[dest] = state->reg[op1] + state->reg[op2];
+}
+
+// Update the CPU state
+void update(cpu_state* state) {
+    // Do nothing for now
+}
+
+int main() {
+    // Initialize the CPU state
+    cpu_state state;
+    state.pc = 0;
+
+    // Load a program into memory
+    state.mem[0] = 0x00821820; // add $3, $4, $2
+    state.mem[1] = 0x03E00008; // jr $31
+
+    // Execute the program
+    while (1) {
+        // Fetch the instruction
+        int inst = fetch(&state);
+
+        // Decode the instruction
+        int opcode, op1, op2;
+        decode(inst, &opcode, &op1, &op2);
+
+        // Execute the instruction
+        switch (opcode) {
+            case 0x20: // add
+                add(&state, op1, op2, op3);
+                break;
+            case 0x08: // jr
+                goto done;
+            default:
+                printf("Invalid opcode: %02X\n", opcode);
+                return 1;
+        }
+
+        // Update the CPU state
+        update(&state)

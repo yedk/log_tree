@@ -1,0 +1,2 @@
+在指令dispatch之后，bypass模块负责准备数据。
+1.如果数据在流水线中，则根据相应计算结果部件的dst address 和 当前需要数据部件的src address进行匹对,对的上即进行选择.
