@@ -1,0 +1,43 @@
+csh：
+    $#: number of arguments passed to the shell.
+    $1:
+    $2:
+    $OLDPWD : path to the previous working directory.
+perl:
+    $$: PID number of the current process
+    \s+: 空格
+    \S ： 非空格
+
+HashMan
+    preprocess
+    // 处理文件中的#define 
+
+
+rzmakeworkarea -g group -d $dir  -n $name 
+        {
+            RZSupport->GroupInstance($Ggrp)
+                    {
+                        HashStruct();
+                            {
+                                新建一个文件 /tmp/preprocess_$$ 
+                                preprocess($RZ_MAIN_DIR/groups.def ,新文件handle);
+                                    {
+                                        
+                                    }
+                            }
+                    }
+            MakeNewWorkArea($Gwadir,$Gwaname,$Gwatype)
+                    {
+
+                    }
+        }
+cd .project/release.work 
+cd $OLDPWD
+hg clone -U xx .h 
+得到.hg
+cd .project/integration.work 
+在subscription里面添加邮箱信息
+dongkun.ye@verisilicon.com
+cd $ILDPWD
+更新hgrc文件
+

@@ -1,1 +1,7 @@
 zturbo返回的data返回给mau，在mau内部通过sel到alu_res_ex，然后
+
+Q:
+    cpcoma指令的第三个操作数的意义
+    isu如何将操作数给到exu
+    跳转指令如何执行的
+    
