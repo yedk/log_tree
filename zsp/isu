@@ -2,3 +2,4 @@ iru : instructions rule
 
 idp_ictl : used for handling BRC misprediction 
 
+isu 由两个模块组成，idispatch 和 isu_dp_rules .
