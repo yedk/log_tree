@@ -1,3 +1,16 @@
 栈的地址是在link.lcf里面进行约束的，如果在dcrt文件里面定义了栈,并且在dcrt文件里使用栈的地址，那么编译链接后栈的地址会出问题。
 不在dcrt文件里定义栈，并且在dcrt文件里使用栈的地址，则地址正确。
 
+对于一个cache,根据index查找对应的cache line 然后对比tag确定相应的way，然后根据block offset读取对应的数据。
+一个way相当于一个数组，对应地址的数据可以放在不同的数组里的相同index部分。
+write through
+no-write allocate
+
+write back
+write allocate
+
+将数据写到下级存储器中，叫做write through,如果hit了，同时也写入cache，
+只写到cache，并做一个记号dirty,叫做write back.
+(miss的话，不做处理，直接写到下级存储器中。 non-write allocate)
+(miss的话，从下级存储器中读取出来存到相应的line叫做write allocate)
+所以write back 一定要和write allocate 配合，write through可以和两个一起配合。
