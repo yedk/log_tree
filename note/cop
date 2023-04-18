@@ -1,0 +1,30 @@
+.equ copA, [0]=0
+.equ copB, [1]=1
+.equ cop_add, [4]=0
+.equ cop_add_reg, [4]=1 //0x10
+.equ cop_wr_reg, [5:4]=10 //0x20
+.equ cop_rd_reg, [5:4]=11 //0x30
+.equ cpr0, [2]=0
+.equ cpr1, [2]=1
+.equ acc,  [3:2]=10
+
+//load a data from the memory
+# 
+#   cpr1 <== mem[a1+4]
+#
+cpldu32 a1,4, cpr1
+//send a data to the coprocessor register
+#
+#   cpr0 <== r0
+#
+cpout40 r0, cpr0|cop_wr_reg
+
+// perform register addition
+cpout40 r0, cpr0|cop_wr_reg
+cpout40 r1, cpr1|cop_wr_reg
+
+cp  cop_A | cop_add_reg
+// read result
+cpin40 r4, copA | acc
+// store result directly to memory
+cpst32 a2,0 copA | acc
