@@ -4,3 +4,7 @@ reqi_is_cond: 表面当前的请求是conditional
 reqi_flush_trans 
 loadi_ready
 
+
+
+# ifu 的作用
+
